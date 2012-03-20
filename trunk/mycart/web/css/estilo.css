@@ -1,0 +1,142 @@
+body{
+	text-align: center;
+}
+#center{
+	position: absolute;
+	left: 300px;
+	top: 150px;
+	width:800px;
+}
+#center hr{
+	width: 500px;
+}
+#cuerpo #left{
+		position: absolute;
+		left: 100px;
+		top: 150px;
+		border-right-style: solid;
+		border-color: #ccc;
+		width: 200px; 
+	}
+#cuerpo #left{
+		margin: 0px;
+		text-align: left;
+	}
+#cuerpo #left p{
+		color: #5276BE;
+		font-size: 24px;
+	}
+
+#cuerpo #login{
+	position: absolute;
+	display: block;
+	width: 300px;
+	left: 80%;
+	top: 10px;
+}
+
+#cuerpo #login:hover{
+	background-color: #EEE;
+}
+
+#cuerpo #login #loginMenu{
+	
+}
+#loginMenu li{
+	list-style-type: none;
+}
+
+#cuerpo #carrito{
+	display: block;
+	position: absolute;
+	top: 200px;
+	right: 10px;
+	width: 300px;
+	border-left: solid 1px;
+}
+
+#header{
+		
+	}
+#header p{
+		color: #5276BE;
+		font-size: 24px;
+		position: absolute;
+		top: 40px;
+		left: 660px;
+	}
+#header h1{
+	font-size: 52px;
+	color: #ccc;
+}
+#header hr{
+		width: 800px;
+	}
+#header #logo{
+		position: absolute;
+		top: 0px;
+		left: 500px;
+	}
+
+#header ul{
+		display: inline-block;
+		list-style: none;
+	}
+#header ul li{
+		display: inline-block;		
+	}
+
+
+#item{
+	display: inline-block;
+   
+}
+#item #img_pro{
+	display: inline-block;
+	width: 200px;
+	}
+	#item #img_pro img{
+		width: 100px;
+	}
+	#item #desc{
+	display: inline-block;
+	background-color: #AAA;
+	width: 200px;
+	}
+	#item #precio{
+	display: inline-block;
+	background-color: #888;
+	width: 200px;
+	}
+   #item #agregar{
+	display: inline-block;
+	background-color: #888;
+	width: 50px;
+	}
+#item:hover{
+	border-left: solid;
+	border-left-width: 5px;
+	border-left-color: #555;
+}
+		
+#registrar{
+		display: block;
+		border-left-style: groove;
+		width: 950px;
+	}
+/*#registrar:hover{
+		background-color: #EED;
+	}
+*/
+#registrar input{
+		font-size: 32px;
+		width: 200px;
+	}
+#registrar input:hover, input:focus{
+		width: 400px;
+	}
+#registrar label{
+		color: #777;
+		font-size: 32px;
+		width: 400px;
+	}
