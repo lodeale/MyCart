@@ -11,6 +11,15 @@ Objetivo:
 Versión del framework:
  - CodeIgniter 2.1.0
 
+Modificar htaccess:
+   En la línea 17, 24 y 32 del archivo .htaccess que se encuentra en el raiz se debe cambiar por el directorio que corresponda.
+Ejemplo: 
+ si el carrito está en el document-root/micarrito entonces suplantar:
+ /CodeIgniter/mycart/     por    /micarrito/
+ 
+ y no modificar nada de lo que viene después del index.php.
+
+
 base de datos:
 
 -- phpMyAdmin SQL Dump
@@ -122,7 +131,4 @@ ALTER TABLE `user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-
 
