@@ -1,23 +1,4 @@
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Mi cart</title>
-<link rel="stylesheet" type="text/css" href="<?= base_url();?>web/css/estilo.css">
-</head>
 <body>
-<div id="header">
-	<h1>Mi Cart</h1>
-	<div id="logo"><img src="<?php echo base_url();?>/web/img/carrito.png" width="150px;"></div>
-	<p>Lo que buscas está acá!!...</p>
-	<hr>
-	<div id="nav">
-		<ul>
-			<li><a href="<?= base_url('carrito/inicio/')?>">Inicio</a></li>
-			<li><a href="<?= base_url('carrito/perfil/registrar')?>">Registrar</a></li>
-			<li><a href="">Nosotros</a></li>
-		</ul>
-	</div>
-</div>
 
 <div id="cuerpo">
 	<div id="left">
@@ -63,16 +44,11 @@
 			foreach($products as $item):
 		?>
 		<div id="item">
-			<div id="img_pro"><img src="<?php echo base_url();?>/web/img/<?= $item->image; ?>"></div>
-			<div id="desc"><p><?= $item->name; ?></p></div>
-			<div id="precio"><p>$<?= $item->price; ?></p></div>
+			<div id="img_pro"><img src="<?php echo base_url();?>/web/img/<?php echo $item->image; ?>"></div>
+			<div id="desc"><p><?php echo $item->name; ?></p></div>
+			<div id="precio"><p>$<?php echo $item->price; ?></p></div>
 		</div>
 		<hr>
 		<?php endforeach; ?>
 	</div>
 </div>
-
-<div id="footer">
-</div>
-</body>
-</html>

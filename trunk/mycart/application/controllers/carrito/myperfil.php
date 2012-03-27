@@ -4,11 +4,23 @@ class Myperfil extends CI_Controller{
 		parent::__construct();
 		$this->_isLogin();
 		$this->load->model("inicio_model");
+		$this->load->helper("email");
 	}
 	public function index(){
- 		$data["titulo"] = "*Mi perfil";
+ 		$data["titulo"] = "Mi perfil";
+ 		if($this->session->userdata("admin")):
+ 			$data["menu"] = array(
+					"Inicio" => "carrito/inicio",
+					"Administrador" => "carrito/admin/",
+					"salir" => "carrito/myperfil/salir"
+					);
+		endif;
 	 	$data["products"] = $this->inicio_model->getProduct();
-	 	$this->load->view("carrito/perfil_view",$data);
+	 	
+	 	$this->load->view("carrito/include/header");
+		$this->load->view("carrito/perfil_view",$data);
+		$this->load->view("carrito/include/menu");
+		$this->load->view("carrito/include/footer");
  	}
  	
  	function _isLogin(){
@@ -26,7 +38,7 @@ class Myperfil extends CI_Controller{
 					'id'=>$row->id,
 					'qty'=>1,
 					'price'=>$row->price,
-					'name'=>$row->name
+					'name'=>substr($row->name,0,10)
 				);
 				$this->cart->insert($data);
 			endforeach;
@@ -36,21 +48,14 @@ class Myperfil extends CI_Controller{
  	}
  	
  	function updateProduct(){
- 		$data = array();
- 		$i = 1;
- 		print_r($this->input->post());
- 		echo "<br>";
- 		print_r($this->cart->contents());
- 		
- 		foreach($this->cart->contents() as $k=>$items):
- 			$prod = array(
-				'rowid' => $items['rowid'],
-				'qty' => $this->input->post('[qty]')
-			);
-			++$i;
-			array_push($data,$prod);
+ 		$prod = array();
+ 		foreach($this->input->post() as $items):
+ 			array_push($prod,array(
+								'rowid' => $items['rowid'],
+								'qty' => $items['qty']
+						));
 		endforeach;
-		$this->cart->update($data);
+		$this->cart->update($prod);
 		redirect("carrito/myperfil");
  	}
  	
@@ -60,7 +65,41 @@ class Myperfil extends CI_Controller{
  	}
  	
  	function marketProduct(){
-		$this->load->view("carrito/pedido");
+ 		$idP = $this->session->userdata("id");
+ 		$data["persona"] = $this->inicio_model->getFactura($idP);
+ 		
+ 		$this->load->view("carrito/include/header");
+		$this->load->view("carrito/pedido_view",$data);
+		$this->load->view("carrito/include/menu");
+		$this->load->view("carrito/include/footer");
+		
+ 	}
+ 	
+ 	public function detailProduct($idP){
+ 		$product = $this->inicio_model->getProduct($idP);
+ 		$data["product"] = $product;
+ 		$this->load->view("carrito/include/header");
+		$this->load->view("carrito/detail_view",$data);
+		$this->load->view("carrito/include/menu");
+		$this->load->view("carrito/include/footer");
+ 	}
+ 	
+ 	public function confirma(){
+ 		if($this->inicio_model->insertPedido()):
+ 			$id = $this->session->userdata("id");
+	 		$user = $this->inicio_model->getEmail($id);
+	 		$mensaje= "Para el deposito la cuenta es:\n
+	 				12987391827391823874\n
+	 				y el telefono es: 2432334";
+	 				
+			send_email($user[0]->email, '[MyCart mi pedido]', $mensaje);
+	 		echo "<script type='text/javascript'>";
+	 		echo "alert(su pedido fue enviado)";
+	 		echo "</script>";
+ 			redirect("carrito/myperfil/clearProduct");
+ 		else:
+ 			exit("No anda");
+ 		endif;
  	}
  	
  	public function salir(){

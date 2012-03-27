@@ -6,25 +6,33 @@
  class Inicio extends CI_Controller{
  	public function __construct(){
  		parent::__construct();
+ 		$this->_isLogin();
  		$this->load->model("inicio_model");
  	}
- 	
- 	public function index(){
- 		$data["products"] = $this->inicio_model->getProduct();
- 		$this->load->view("carrito/inicio_view",$data);
- 	}
- 	
- 	public function registrar($valid = null){
- 		$data["titulo"] = "Resgistrarse";
- 		if($valid):
- 			$res = $this->inicio_model->registrar($this->input->post());
- 			if($res):
- 				redirect("carrito/inicio");
- 			endif;	
- 		else:
- 			$this->load->view("carrito/registrar_view",$data);
+	
+	function _isLogin(){
+ 		$test = $this->session->userdata('loginTrue');
+ 		if($test):
+ 			redirect("carrito/myperfil");
  		endif;
- 		
  	}
+ 	
+	public function index(){
+		/*
+		 * Cargamos los productos de
+		 * la base de datos
+		 */
+ 		$data["products"] = $this->inicio_model->getProduct();
+ 		
+ 		/*
+ 		 * Incluimos las partes para conformar 
+ 		 * la vista de inicio.
+ 		 */
+ 		$this->load->view("carrito/include/header");
+		$this->load->view("carrito/inicio_view",$data);
+		$this->load->view("carrito/include/menu");
+		$this->load->view("carrito/include/footer");
+	}
+ 	 	
  }
 ?>

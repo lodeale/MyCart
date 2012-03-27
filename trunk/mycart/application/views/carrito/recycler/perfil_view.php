@@ -1,6 +1,27 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title><?= $titulo ?></title>
+<link rel="stylesheet" type="text/css" href="<?= base_url();?>web/css/estilo.css">
+
+</head>
+<body>
+<div id="header">
+	<h1>Mi Cart</h1>
+	<div id="logo"><img src="<?php echo base_url();?>/web/img/carrito.png" width="150px;"></div>
+	<hr>
+	<div id="nav">
+		<ul>
+			<li><a href="">Inicio</a></li>
+			<li><a href="<?= base_url('carrito/inicio/registrar')?>">Registrar</a></li>
+			<li><a href="">Nosotros</a></li>
+		</ul>
+	</div>
+</div>
+
 <div id="cuerpo">
 	<div id="login">
-		<img src="<?php echo base_url()."/web/img/login.png"; ?>" width="30">
+		<img src="<?= base_url()."/web/img/login.png"; ?>" width="30">
 			<?php
 				echo "<b>".$this->session->userdata("user")."</b>";
 			?>
@@ -18,12 +39,12 @@
 			foreach($products as $item):
 		?>
 		<div id="item">
-			<div id="img_pro"><img src="<?php echo base_url();?>/web/img/<?php echo $item->image; ?>"></div>
-			<div id="desc"><p><?php echo  $item->name; ?></p></div>
-			<div id="precio"><p>$<?php echo $item->price; ?></p></div>
+			<div id="img_pro"><img src="<?php echo base_url();?>/web/img/<?= $item->image; ?>"></div>
+			<div id="desc"><p><?= $item->name; ?></p></div>
+			<div id="precio"><p>$<?= $item->price; ?></p></div>
 			<div id="agregar">
-			<a href="myperfil/addProduct/<?php echo $item->id; ?>"><img src="<?php echo base_url();?>web/img/ok.jpg" width="50"></a>
-			<a href="myperfil/detailProduct/<?php echo $item->id; ?>">Details</a>
+			<a href="myperfil/addProduct/<?= $item->id; ?>"><img src="<?= base_url();?>web/img/ok.jpg" width="50"></a>
+			<a href="myperfil/detailProduct/<?= $item->id; ?>">Details</a>
 			</div>
 		</div>
 		<hr>
@@ -81,3 +102,8 @@
 		<?php echo form_close(); ?>
 	</div>
 </div>
+
+<div id="footer">
+</div>
+</body>
+</html>
